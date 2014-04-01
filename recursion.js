@@ -1,11 +1,19 @@
 'use strict';
 
+function reduce(arr, fn, initial) {
 
+	// if (!arr.length)
+	// 	return initial;
 
-module.exports = function countWords(inputWords) {
-	return inputWords.reduce(function (d, word) {
-		d[word] = d[word] !== undefined ? d[word] + 1 : 1;
+	// return reduce(arr.slice(1),
+	// 	fn,
+	// 	fn(initial, arr[0]));
 
-		return d;
-	}, {});
-};
+	return (function reduceOne(index, value) {
+		if (index > arr.length - 1) return value;
+
+		return reduceOne(index + 1, fn(value, arr[index], index, arr));
+	})(0, initial);
+}
+
+module.exports = reduce;
